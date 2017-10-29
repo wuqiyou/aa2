@@ -21,6 +21,19 @@ public class AnimalFood extends FarmItem {
   }
 
   /**
+   * Search for food
+   */
+  public static AnimalFood foodIsHere() {
+    for (int index = 0; index < Farm.myFarmItems.size(); index++) {
+      FarmItem item = (FarmItem)Farm.myFarmItems.get(index);
+      if (item instanceof AnimalFood){
+        return (AnimalFood)item;
+      }
+    }
+    return null;
+  }
+
+  /**
    * Causes this item to take its turn in the farm-pen simulation, blown due to strong winds. Up in
    * this case
    */

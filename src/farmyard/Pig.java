@@ -14,22 +14,35 @@ public class Pig extends MovableFarmItem {
    * Causes this item to take its turn in the farm-pen simulation.
    */
   public void move() {
+    // Figure out whether I turn around.
+    tryTurnAround();
 
-   super.move();
-
-    // Move one spot to the right or left.
-    if (goingRight) {
-      column += 1;
-    } else {
-      column -= 1;
-    }
+      // Get to food ?
+      if (target == null) {
+          target = AnimalFood.foodIsHere();
+      }
+      if (target != null) {
+          System.out.println("Target acquired: " + target.row + " " + target.column + "| Me: " + row + " " + column);
+          if (row == target.row && column == target.column) {
+              // Meet with food
+              System.out.println("Food!");
+              // clear egg in the array
+              Farm.RemoveItem(target);
+              // reset target
+              target = null;
+          } else {
+              MoveTowardTarget(target);
+          }
+      } else {
+          // no egg to pick up
+          MoveRandomly();
+      }
 
     // Sometimes we digest.
     double d = Math.random();
     if (d < 0.2) {
       clearStomach();
     }
-
   }
 
   /**
