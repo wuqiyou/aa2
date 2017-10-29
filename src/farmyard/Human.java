@@ -11,17 +11,9 @@ import java.util.ArrayList;
 
 public class Human extends MovableFarmItem {
 
-  /**
-   * (int)(640/6) columns, (int)(480/10) rows.
-   */
-  public static Object[][] myFarmAnimals = new Object[(int) (480 / 10)][(int) (640 / 6)];
-
-
-
   private ArrayList<Egg> myBasket = new ArrayList<Egg>();
 
   private GraphicsContext g;
-
 
   /**
    * The animal food the human is feeding his/her beloved animals.
@@ -40,23 +32,21 @@ public class Human extends MovableFarmItem {
    * Causes human to drop down 4 piece s of food all around.
    */
   protected void dropFood() {
-    AnimalFood fooood = new AnimalFood();
-    fooood.setLocation(row - 1, column - 1);
-    myFarmAnimals[row - 1][column - 1] = fooood;
+    AnimalFood food = new AnimalFood();
+    food.setLocation(row - 1, column - 1);
+    Farm.AddItem(food);
 
-    fooood = new AnimalFood();
-    fooood.setLocation(row - 1, column + 1);
-    myFarmAnimals[row - 1][column + 1] = fooood;
+    food = new AnimalFood();
+    food.setLocation(row - 1, column + 1);
+    Farm.AddItem(food);
 
-    fooood = new AnimalFood();
-    fooood.setLocation(row + 1, column - 1);
-    myFarmAnimals[row + 1][column - 1] = fooood;
+    food = new AnimalFood();
+    food.setLocation(row + 1, column - 1);
+    Farm.AddItem(food);
 
-    fooood = new AnimalFood();
-    fooood.setLocation(row + 1, column + 1);
-    myFarmAnimals[row + 1][column + 1] = fooood;
-
-
+    food = new AnimalFood();
+    food.setLocation(row + 1, column + 1);
+    Farm.AddItem(food);
   }
   /**
    * Draws this farm pen item.
@@ -69,9 +59,7 @@ public class Human extends MovableFarmItem {
     g.fillText("Eggs: " + myBasket.size(), 2 * 10, 2 * 6);
   }
 
-
   Egg target = null;
-
   /**
    * Causes this item to take its turn in the farm-pensimulation.
    */
@@ -88,16 +76,14 @@ public class Human extends MovableFarmItem {
       if (row == target.row && column == target.column) {
         System.out.println("Egg!");
         this.myBasket.add(target);
-        target = null;
         // clear egg in the array
-        Human.myFarmAnimals[row][column] = null;
+        Farm.RemoveItem(target);
+        target = null;
         if (myBasket.size() % 12 == 0) {
           System.out.println("Dozen!");
           g.fillText("Eggs: " + myBasket.size(), 1 * 10, 1 * 6);
         }
-
       } else {
-
         // move toward the egg
         if (row < target.row) {
           row += 1;
@@ -140,6 +126,5 @@ public class Human extends MovableFarmItem {
 
     // Figure out whether I turn around.
     super.move();
-
   }
 }

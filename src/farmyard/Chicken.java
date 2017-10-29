@@ -15,11 +15,10 @@ public class Chicken extends MovableFarmItem {
    * Set this item's location.
    */
   public static Egg aneggishere() {
-    for (int r = 0; r != Human.myFarmAnimals.length; r++) {
-      for (int c = 0; c != Human.myFarmAnimals[0].length; c++) {
-        if (Human.myFarmAnimals[r][c] instanceof Egg) {
-          return (Egg) Human.myFarmAnimals[r][c];
-        }
+    for (int index = 0; index < Farm.myFarmItems.size(); index++) {
+      FarmItem item = (FarmItem)Farm.myFarmItems.get(index);
+      if (item instanceof Egg){
+        return (Egg)item;
       }
     }
     return null;
@@ -59,8 +58,7 @@ public class Chicken extends MovableFarmItem {
     System.out.println("Breakfast! " + "Egg loc: " + row + " " + column);
     Egg egg = new Egg();
     egg.setLocation(row, column);
-
-    Human.myFarmAnimals[row][column] = egg;
+    Farm.AddItem(egg);
   }
 
   /**
@@ -71,8 +69,7 @@ public class Chicken extends MovableFarmItem {
 
     AnimalManure getTheScoop = new AnimalManure(".");
     getTheScoop.setLocation(row, column);
-
-    Human.myFarmAnimals[row][column] = getTheScoop;
+    Farm.AddItem(getTheScoop);
 
     return true;
   }
