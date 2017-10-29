@@ -3,14 +3,12 @@ package farmyard;
 import javafx.scene.paint.Color;
 
 public class Pig extends MovableFarmItem {
-
   /**
    * Constructs a new Pig.
    */
   public Pig() {
     super(":(8)", Color.PINK.darker().darker().darker());
   }
-
 
   /**
    * Causes this item to take its turn in the farm-pen simulation.
@@ -42,10 +40,8 @@ public class Pig extends MovableFarmItem {
 
     AnimalManure newManure = new AnimalManure("*");
     newManure.setLocation(row, column);
-
-    Human.myFarmAnimals[row][column] = newManure;
+    Farm.AddItem(newManure);
 
     return true;
   }
-
 }
