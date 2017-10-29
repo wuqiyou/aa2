@@ -54,6 +54,14 @@ public class Farm {
         Human human1 = new Human();
         human1.setLocation(30, 30);
         myFarmItems.add(human1);
+
+        Sheep sheep1 = new Sheep();
+        sheep1.setLocation(40, 10);
+        myFarmItems.add(sheep1);
+
+        Sheep sheep2 = new Sheep();
+        sheep2.setLocation(10, 40);
+        myFarmItems.add(sheep2);
     }
 
     /**

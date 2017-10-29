@@ -21,13 +21,27 @@ public class AnimalFood extends FarmItem {
   }
 
   /**
+   * Search for food
+   */
+  public static AnimalFood foodIsHere() {
+    for (int index = 0; index < Farm.myFarmItems.size(); index++) {
+      FarmItem item = (FarmItem)Farm.myFarmItems.get(index);
+      if (item instanceof AnimalFood){
+        return (AnimalFood)item;
+      }
+    }
+    return null;
+  }
+
+  /**
    * Causes this item to take its turn in the farm-pen simulation, blown due to strong winds. Up in
    * this case
    */
   public void blownUp() {
-
-    // Move upwards
     row--;
+    if (row == -1) {
+      row = Farm.MaxRow - 1;
+    }
   }
 
   /**
@@ -35,9 +49,11 @@ public class AnimalFood extends FarmItem {
    * in this case
    */
   public void blownDown() {
-
-    // Move downwards
     row++;
+    if (row == Farm.MaxRow)
+    {
+      row = 0;
+    }
   }
 
   /**
@@ -45,8 +61,10 @@ public class AnimalFood extends FarmItem {
    * Left in this case
    */
   public void blownLeft() {
-
-    column--;//move left
+    column--;
+    if (column == -1) {
+      column = Farm.MaxCol - 1;
+    }
   }
 
   /**
@@ -54,8 +72,10 @@ public class AnimalFood extends FarmItem {
    * Right in this case
    */
   public void blownRight() {
-
-    column++;//move right
+    column++;
+    if (column == Farm.MaxCol)
+    {
+      column = 0;
+    }
   }
-
 }
