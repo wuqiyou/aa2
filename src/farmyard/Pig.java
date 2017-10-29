@@ -3,6 +3,7 @@ package farmyard;
 import javafx.scene.paint.Color;
 
 public class Pig extends MovableFarmItem {
+    private boolean allowDefecate = false;
   /**
    * Constructs a new Pig.
    */
@@ -26,6 +27,7 @@ public class Pig extends MovableFarmItem {
           if (row == target.row && column == target.column) {
               // Meet with food
               System.out.println("Food!");
+              allowDefecate = true;
               // clear egg in the array
               Farm.RemoveItem(target);
               // reset target
@@ -40,7 +42,7 @@ public class Pig extends MovableFarmItem {
 
     // Sometimes we digest.
     double d = Math.random();
-    if (d < 0.2) {
+    if (d < 0.2 && allowDefecate) {
       clearStomach();
     }
   }
@@ -48,13 +50,13 @@ public class Pig extends MovableFarmItem {
   /**
    * Helps animal clear stomach
    */
-  private final boolean clearStomach() {
+  private final void clearStomach() {
     System.out.println("Pig stink");
 
     AnimalManure newManure = new AnimalManure("*");
     newManure.setLocation(row, column);
     Farm.AddItem(newManure);
 
-    return true;
+    allowDefecate = false;
   }
 }

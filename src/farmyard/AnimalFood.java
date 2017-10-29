@@ -38,9 +38,10 @@ public class AnimalFood extends FarmItem {
    * this case
    */
   public void blownUp() {
-
-    // Move upwards
     row--;
+    if (row == -1) {
+      row = Farm.MaxRow - 1;
+    }
   }
 
   /**
@@ -48,9 +49,11 @@ public class AnimalFood extends FarmItem {
    * in this case
    */
   public void blownDown() {
-
-    // Move downwards
     row++;
+    if (row == Farm.MaxRow)
+    {
+      row = 0;
+    }
   }
 
   /**
@@ -58,8 +61,10 @@ public class AnimalFood extends FarmItem {
    * Left in this case
    */
   public void blownLeft() {
-
-    column--;//move left
+    column--;
+    if (column == -1) {
+      column = Farm.MaxCol - 1;
+    }
   }
 
   /**
@@ -67,8 +72,10 @@ public class AnimalFood extends FarmItem {
    * Right in this case
    */
   public void blownRight() {
-
-    column++;//move right
+    column++;
+    if (column == Farm.MaxCol)
+    {
+      column = 0;
+    }
   }
-
 }
